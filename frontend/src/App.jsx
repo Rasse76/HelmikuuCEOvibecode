@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import './App.css'
+import { playQtyIncrease, playQtyDecrease, playProductAdded, playProductUpdated, playProductDeleted, playError } from './sounds'
 
 const API = '/api'
 
@@ -136,6 +137,8 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
     const next = Math.max(0, localQty + delta)
     setLocalQty(next)
     setSaving(true)
+    if (delta > 0) playQtyIncrease()
+    else if (delta < 0 && next !== localQty) playQtyDecrease()
     await onQtyChange(product.id, next)
     setSaving(false)
   }
@@ -214,14 +217,17 @@ export default function App() {
       const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
       if (!res.ok) {
         const err = await res.json()
+        playError()
         toast(err.error || 'Save failed', 'error')
         return
       }
+      if (editProduct?.id) { playProductUpdated() } else { playProductAdded() }
       toast(editProduct?.id ? 'Product updated ✓' : 'Product added ✓', 'success')
       setEditProduct(null)
       fetchProducts()
       fetchCategories()
     } catch {
+      playError()
       toast('Network error', 'error')
     }
   }
@@ -229,12 +235,14 @@ export default function App() {
   const deleteProductFn = async () => {
     try {
       const res = await fetch(`${API}/products/${deleteProduct.id}`, { method: 'DELETE' })
-      if (!res.ok) { toast('Delete failed', 'error'); return }
+      if (!res.ok) { playError(); toast('Delete failed', 'error'); return }
+      playProductDeleted()
       toast('Product removed', 'info')
       setDeleteProduct(null)
       fetchProducts()
       fetchCategories()
     } catch {
+      playError()
       toast('Network error', 'error')
     }
   }
@@ -244,8 +252,9 @@ export default function App() {
       const res = await fetch(`${API}/products/${id}/quantity`, {
         method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ quantity })
       })
-      if (!res.ok) toast('Failed to update quantity', 'error')
+      if (!res.ok) { playError(); toast('Failed to update quantity', 'error') }
     } catch {
+      playError()
       toast('Network error', 'error')
     }
   }
