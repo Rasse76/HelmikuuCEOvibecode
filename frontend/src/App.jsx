@@ -32,6 +32,7 @@ function ProductModal({ product, onSave, onClose }) {
     quantity: product?.quantity ?? '',
     sku: product?.sku || '',
     description: product?.description || '',
+    image_url: product?.image_url || '',
   })
   const [errors, setErrors] = useState({})
   const [saving, setSaving] = useState(false)
@@ -93,6 +94,10 @@ function ProductModal({ product, onSave, onClose }) {
             <label className="form-label">Description</label>
             <textarea className="form-textarea" value={form.description} onChange={e => set('description', e.target.value)} placeholder="Flight numbers, specs, notes…" />
           </div>
+          <div className="form-group full">
+            <label className="form-label">Image URL</label>
+            <input className="form-input" value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://… or /images/putter.svg" />
+          </div>
         </div>
         <div className="modal-actions">
           <button className="btn-cancel" onClick={onClose}>Cancel</button>
@@ -129,6 +134,7 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
   const q = product.quantity
   const [localQty, setLocalQty] = useState(q)
   const [saving, setSaving] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   useEffect(() => setLocalQty(product.quantity), [product.quantity])
 
@@ -144,6 +150,16 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
 
   return (
     <div className="product-card">
+      {product.image_url && !imgError && (
+        <div className="card-img-wrap">
+          <img
+            className="card-img"
+            src={product.image_url}
+            alt={product.name}
+            onError={() => setImgError(true)}
+          />
+        </div>
+      )}
       <div className="card-header">
         <span className="card-name">{product.name}</span>
         <span className={catClass}>{product.category}</span>

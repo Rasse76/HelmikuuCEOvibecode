@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="plate" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#713f12"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#3f2005"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="3" dy="4" stdDeviation="5" flood-color="rgba(0,0,0,0.5)"/>
+    </filter>
+  </defs>
+  <rect width="200" height="200" fill="#0d2a1a" rx="12"/>
+  <ellipse cx="103" cy="106" rx="88" ry="85" fill="rgba(0,0,0,0.4)"/>
+  <circle cx="100" cy="100" r="88" fill="url(#rim)" filter="url(#shadow)"/>
+  <circle cx="100" cy="100" r="72" fill="url(#plate)"/>
+  <circle cx="100" cy="100" r="44" fill="#92400e" opacity="0.85"/>
+  <circle cx="100" cy="100" r="44" fill="none" stroke="#fde047" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#fde047" stroke-width="1.5" opacity="0.3"/>
+  <ellipse cx="82" cy="76" rx="28" ry="16" fill="rgba(255,255,255,0.18)" transform="rotate(-25 82 76)"/>
+  <text x="100" y="96" text-anchor="middle" fill="#fde047" font-size="9" font-family="sans-serif" font-weight="700" letter-spacing="1" opacity="0.9">MID-RANGE</text>
+  <text x="100" y="109" text-anchor="middle" fill="#fde047" font-size="9" font-family="sans-serif" font-weight="700" letter-spacing="1" opacity="0.9">DISC</text>
+  <circle cx="100" cy="100" r="7" fill="#3f2005"/>
+  <circle cx="100" cy="100" r="4" fill="#713f12"/>
+</svg>
