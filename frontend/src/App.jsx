@@ -4,7 +4,7 @@ import { playQtyIncrease, playQtyDecrease, playProductAdded, playProductUpdated,
 
 const API = '/api'
 
-const CATEGORIES = ['Distance Driver', 'Fairway Driver', 'Mid-Range', 'Putter', 'Disc Bag', 'Basket', 'Accessories']
+const CATEGORIES = ['Distance Driver', 'Fairway Driver', 'Mid-Range', 'Putter', 'Disc Bag', 'Accessories and baskets']
 
 const CATEGORY_IMAGES = {
   'Distance Driver': '/images/distance-driver.svg',
@@ -12,8 +12,7 @@ const CATEGORY_IMAGES = {
   'Mid-Range': '/images/mid-range.svg',
   'Putter': '/images/putter.svg',
   'Disc Bag': '/images/disc-bag.svg',
-  'Basket': '/images/basket.svg',
-  'Accessories': '/images/accessories.svg',
+  'Accessories and baskets': '/images/accessories.svg',
 }
 
 function qtyClass(q) {

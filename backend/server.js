@@ -67,14 +67,18 @@ if (count.cnt === 0) {
     ['Dynamic Discs Ranger Bag', 'Disc Bag', 89.99, 8, 'DG-017', '18+ disc capacity. Backpack-style with padded straps, cooler pocket, and rain fly included.', '/images/disc-bag.svg'],
     ['Prodigy Disc BP-3 Backpack', 'Disc Bag', 119.99, 6, 'DG-018', '20–25 disc capacity. Premium backpack with multiple pockets, insulated cooler, and ergonomic design.', '/images/disc-bag.svg'],
     // Equipment & Accessories
-    ['MVP Black Hole Pro Basket', 'Basket', 289.99, 3, 'DG-019', 'Competition-grade portable disc golf basket. 24-chain dual-level catching system, heavy-duty steel construction.', '/images/basket.svg'],
-    ['Discraft Towel & Mini Marker Set', 'Accessories', 14.99, 60, 'DG-020', 'Includes microfiber disc cleaning towel and two mini disc markers. Essential field accessories for any round.', '/images/accessories.svg'],
+    ['MVP Black Hole Pro Basket', 'Accessories and baskets', 289.99, 3, 'DG-019', 'Competition-grade portable disc golf basket. 24-chain dual-level catching system, heavy-duty steel construction.', '/images/basket.svg'],
+    ['Discraft Towel & Mini Marker Set', 'Accessories and baskets', 14.99, 60, 'DG-020', 'Includes microfiber disc cleaning towel and two mini disc markers. Essential field accessories for any round.', '/images/accessories.svg'],
   ];
   const insertMany = db.transaction((items) => {
     for (const item of items) insert.run(...item);
   });
   insertMany(products);
 }
+
+// Migration: Combine Basket and Accessories into Accessories and baskets
+db.prepare('UPDATE products SET category = ? WHERE category = ?').run('Accessories and baskets', 'Basket');
+db.prepare('UPDATE products SET category = ? WHERE category = ?').run('Accessories and baskets', 'Accessories');
 
 // Update existing products that have no image_url with category-based defaults
 const categoryImages = {
@@ -83,8 +87,7 @@ const categoryImages = {
   'Mid-Range': '/images/mid-range.svg',
   'Putter': '/images/putter.svg',
   'Disc Bag': '/images/disc-bag.svg',
-  'Basket': '/images/basket.svg',
-  'Accessories': '/images/accessories.svg',
+  'Accessories and baskets': '/images/accessories.svg',
 };
 const updateImg = db.prepare('UPDATE products SET image_url = ? WHERE (image_url IS NULL OR image_url = \'\') AND category = ?');
 for (const [cat, img] of Object.entries(categoryImages)) {
