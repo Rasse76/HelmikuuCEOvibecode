@@ -15,6 +15,17 @@ const CATEGORY_IMAGES = {
   'Accessories and baskets': '/images/accessories.svg',
 }
 
+// Define custom category order. Discs first, then other items.
+// Edit this array to change the display order of categories
+const CATEGORY_ORDER = [
+  'Distance Driver',
+  'Fairway Driver',
+  'Mid-Range',
+  'Putter',
+  'Disc Bag',
+  'Accessories and baskets',
+]
+
 function qtyClass(q) {
   if (q === 0) return 'low'
   if (q <= 5) return 'warn'
@@ -82,7 +93,7 @@ function ProductModal({ product, onSave, onClose }) {
           <div className="form-group">
             <label className="form-label">Category</label>
             <select className="form-select" value={form.category} onChange={e => set('category', e.target.value)}>
-              {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              {CATEGORY_ORDER.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div className="form-group">
@@ -303,6 +314,17 @@ export default function App() {
     return groups
   }
 
+  // Sort categories by the defined CATEGORY_ORDER
+  const sortedCategories = (cats) => {
+    return cats.sort((a, b) => {
+      const aIndex = CATEGORY_ORDER.indexOf(a)
+      const bIndex = CATEGORY_ORDER.indexOf(b)
+      if (aIndex === -1) return 1 // Unknown categories go to end
+      if (bIndex === -1) return -1
+      return aIndex - bIndex
+    })
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -339,7 +361,7 @@ export default function App() {
         {viewMode === 'grid' && (
           <>
             <div className="cat-pills">
-              {['All', ...categories].map(cat => (
+              {['All', ...sortedCategories(categories)].map(cat => (
                 <button key={cat} className={`cat-pill ${activeCat === cat ? 'active' : ''}`} onClick={() => setActiveCat(cat)}>{cat}</button>
               ))}
             </div>
@@ -368,7 +390,7 @@ export default function App() {
               <div className="loading"><div className="spinner" /></div>
             ) : (
               <div className="categories-view">
-                {categories.map(cat => {
+                {sortedCategories(categories).map(cat => {
                   const catProducts = search 
                     ? groupedByCategory()[cat]?.filter(p => 
                         p.name.toLowerCase().includes(search.toLowerCase()) ||
