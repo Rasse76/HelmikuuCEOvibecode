@@ -209,6 +209,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [activeCat, setActiveCat] = useState('All')
+  const [viewMode, setViewMode] = useState('grid') // 'grid' or 'category'
   const [editProduct, setEditProduct] = useState(null)  // null=closed, {}=new, product=edit
   const [deleteProduct, setDeleteProduct] = useState(null)
   const { toasts, add: toast } = useToasts()
@@ -291,6 +292,18 @@ export default function App() {
   const totalStock = products.reduce((s, p) => s + p.quantity, 0)
   const lowStock = products.filter(p => p.quantity <= 5).length
 
+  // Organize products by category
+  const groupedByCategory = () => {
+    const groups = {}
+    categories.forEach(cat => { groups[cat] = [] })
+    products.forEach(product => {
+      if (groups[product.category]) {
+        groups[product.category].push(product)
+      }
+    })
+    return groups
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -317,29 +330,73 @@ export default function App() {
             <span className="search-icon">🔍</span>
             <input className="search-input" placeholder="Search by name or SKU…" value={search} onChange={e => setSearch(e.target.value)} />
           </div>
+          <div className="view-toggle">
+            <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} title="Grid view" onClick={() => setViewMode('grid')}>⊞ Grid</button>
+            <button className={`view-btn ${viewMode === 'category' ? 'active' : ''}`} title="Category view" onClick={() => setViewMode('category')}>📑 Categories</button>
+          </div>
           <button className="btn-add" onClick={() => setEditProduct({})}>＋ Add Product</button>
         </div>
 
-        <div className="cat-pills">
-          {['All', ...categories].map(cat => (
-            <button key={cat} className={`cat-pill ${activeCat === cat ? 'active' : ''}`} onClick={() => setActiveCat(cat)}>{cat}</button>
-          ))}
-        </div>
+        {viewMode === 'grid' && (
+          <>
+            <div className="cat-pills">
+              {['All', ...categories].map(cat => (
+                <button key={cat} className={`cat-pill ${activeCat === cat ? 'active' : ''}`} onClick={() => setActiveCat(cat)}>{cat}</button>
+              ))}
+            </div>
 
-        {loading ? (
-          <div className="loading"><div className="spinner" /></div>
-        ) : products.length === 0 ? (
-          <div className="empty">
-            <div className="empty-icon">🥏</div>
-            <h3>No products found</h3>
-            <p>{search || activeCat !== 'All' ? 'Try adjusting your filters.' : 'Add your first product to get started.'}</p>
-          </div>
-        ) : (
-          <div className="products-grid">
-            {products.map(p => (
-              <ProductCard key={p.id} product={p} onEdit={setEditProduct} onDelete={setDeleteProduct} onQtyChange={updateQty} />
-            ))}
-          </div>
+            {loading ? (
+              <div className="loading"><div className="spinner" /></div>
+            ) : products.length === 0 ? (
+              <div className="empty">
+                <div className="empty-icon">🥏</div>
+                <h3>No products found</h3>
+                <p>{search || activeCat !== 'All' ? 'Try adjusting your filters.' : 'Add your first product to get started.'}</p>
+              </div>
+            ) : (
+              <div className="products-grid">
+                {products.map(p => (
+                  <ProductCard key={p.id} product={p} onEdit={setEditProduct} onDelete={setDeleteProduct} onQtyChange={updateQty} />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {viewMode === 'category' && (
+          <>
+            {loading ? (
+              <div className="loading"><div className="spinner" /></div>
+            ) : (
+              <div className="categories-view">
+                {categories.map(cat => {
+                  const catProducts = search 
+                    ? groupedByCategory()[cat]?.filter(p => 
+                        p.name.toLowerCase().includes(search.toLowerCase()) ||
+                        p.sku.toLowerCase().includes(search.toLowerCase())
+                      ) || []
+                    : groupedByCategory()[cat] || []
+                  
+                  if (catProducts.length === 0) return null
+                  
+                  return (
+                    <div key={cat} className="category-section">
+                      <div className="category-header">
+                        <span className="category-icon">{CATEGORY_IMAGES[cat] ? '📁' : '🏷️'}</span>
+                        <h2 className="category-title">{cat}</h2>
+                        <span className="category-count">{catProducts.length} items</span>
+                      </div>
+                      <div className="products-grid">
+                        {catProducts.map(p => (
+                          <ProductCard key={p.id} product={p} onEdit={setEditProduct} onDelete={setDeleteProduct} onQtyChange={updateQty} />
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </>
         )}
       </main>
 
