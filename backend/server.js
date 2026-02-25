@@ -25,33 +25,39 @@ db.exec(`
   )
 `);
 
-// Seed with 20 products if empty
+// Seed with 20 disc golf products if empty
 const count = db.prepare('SELECT COUNT(*) as cnt FROM products').get();
 if (count.cnt === 0) {
   const insert = db.prepare(
     'INSERT INTO products (name, category, price, quantity, sku, description) VALUES (?, ?, ?, ?, ?, ?)'
   );
   const products = [
-    ['Wireless Headphones', 'Electronics', 79.99, 45, 'SKU-001', 'Premium sound quality with noise cancellation'],
-    ['Mechanical Keyboard', 'Electronics', 129.99, 30, 'SKU-002', 'Tactile switches with RGB backlight'],
-    ['USB-C Hub 7-in-1', 'Electronics', 49.99, 60, 'SKU-003', 'Multi-port hub with HDMI and USB 3.0'],
-    ['Running Shoes', 'Footwear', 89.99, 25, 'SKU-004', 'Lightweight and breathable for long runs'],
-    ['Yoga Mat', 'Sports', 34.99, 50, 'SKU-005', 'Non-slip surface, 6mm thick'],
-    ['Coffee Maker', 'Kitchen', 59.99, 18, 'SKU-006', '12-cup programmable coffee maker'],
-    ['Stainless Steel Water Bottle', 'Kitchen', 24.99, 80, 'SKU-007', '32oz insulated, keeps drinks cold 24h'],
-    ['Desk Lamp LED', 'Office', 39.99, 35, 'SKU-008', 'Adjustable brightness and color temperature'],
-    ['Notebook Set (3 pack)', 'Office', 14.99, 100, 'SKU-009', 'A5 ruled notebooks, 200 pages each'],
-    ['Backpack 30L', 'Bags', 69.99, 22, 'SKU-010', 'Waterproof with laptop compartment'],
-    ['Sunglasses Polarized', 'Accessories', 44.99, 40, 'SKU-011', 'UV400 protection, lightweight frame'],
-    ['Bluetooth Speaker', 'Electronics', 54.99, 28, 'SKU-012', '360° sound, 12-hour battery life'],
-    ['Plant Pot Ceramic Set', 'Home', 29.99, 55, 'SKU-013', 'Set of 3 modern ceramic pots'],
-    ['Face Moisturizer SPF30', 'Beauty', 22.99, 65, 'SKU-014', 'Daily hydrating cream with sun protection'],
-    ['Resistance Bands Set', 'Sports', 19.99, 70, 'SKU-015', '5 resistance levels, includes carry bag'],
-    ['Cast Iron Skillet', 'Kitchen', 44.99, 15, 'SKU-016', '10-inch pre-seasoned, oven safe'],
-    ['Wireless Mouse', 'Electronics', 34.99, 48, 'SKU-017', 'Ergonomic design, silent click'],
-    ['Scented Candle Set', 'Home', 27.99, 90, 'SKU-018', 'Set of 4 soy wax candles, 40h burn time'],
-    ['Travel Pillow Memory Foam', 'Travel', 19.99, 38, 'SKU-019', 'Ergonomic neck support for travel'],
-    ['Vitamin C Supplement 60ct', 'Health', 12.99, 120, 'SKU-020', '1000mg daily immune support'],
+    // Distance Drivers
+    ['Innova Boss', 'Distance Driver', 16.99, 24, 'DG-001', 'Innova – Speed 13 | Glide 5 | Turn -1 | Fade 3. Overstable high-speed driver. Great for powerful throwers.'],
+    ['Discraft Zeus', 'Distance Driver', 17.99, 18, 'DG-002', 'Discraft – Speed 12 | Glide 5 | Turn -1 | Fade 3. Paul McBeth signature overstable driver.'],
+    ['Dynamic Discs Felon', 'Distance Driver', 16.99, 20, 'DG-003', 'Dynamic Discs – Speed 12 | Glide 5 | Turn 0 | Fade 3. Overstable workhorse driver for headwinds.'],
+    ['Latitude 64 Missilen', 'Distance Driver', 17.99, 15, 'DG-004', 'Latitude 64 – Speed 14 | Glide 4 | Turn 0 | Fade 4. Max-speed overstable driver for pro-level power.'],
+    // Fairway Drivers
+    ['Innova Leopard3', 'Fairway Driver', 15.99, 30, 'DG-005', 'Innova – Speed 7 | Glide 5 | Turn -2 | Fade 1. Understable fairway driver, great for beginners and hyzer-flips.'],
+    ['Discraft Buzzz SS', 'Fairway Driver', 15.99, 25, 'DG-006', 'Discraft – Speed 5 | Glide 5 | Turn -3 | Fade 1. Understable fairway driver ideal for anhyzer lines.'],
+    ['Kastaplast Reko', 'Fairway Driver', 17.99, 22, 'DG-007', 'Kastaplast – Speed 4 | Glide 7 | Turn -1 | Fade 1. Straight, reliable fairway driver for all skill levels.'],
+    // Mid-Range Discs
+    ['Innova Mako3', 'Mid-Range', 14.99, 35, 'DG-008', 'Innova – Speed 5 | Glide 5 | Turn 0 | Fade 0. Perfectly neutral mid-range, goes exactly where you throw it.'],
+    ['Discraft Buzzz', 'Mid-Range', 15.99, 40, 'DG-009', 'Discraft – Speed 5 | Glide 4 | Turn -1 | Fade 1. The most popular mid-range disc ever made. Reliable and straight.'],
+    ['Dynamic Discs Verdict', 'Mid-Range', 14.99, 28, 'DG-010', 'Dynamic Discs – Speed 5 | Glide 5 | Turn -1 | Fade 2. Versatile overstable mid-range for accurate approach shots.'],
+    ['Westside Discs Stag', 'Mid-Range', 15.99, 22, 'DG-011', 'Westside – Speed 5 | Glide 5 | Turn -1 | Fade 1. Controllable mid-range with smooth flight path.'],
+    // Putters
+    ['Innova Aviar', 'Putter', 13.99, 50, 'DG-012', 'Innova – Speed 2 | Glide 3 | Turn 0 | Fade 1. The classic putter. Reliable, consistent, trusted by pros worldwide.'],
+    ['Discraft Zone', 'Putter', 14.99, 38, 'DG-013', 'Discraft – Speed 4 | Glide 3 | Turn 0 | Fade 3. Overstable approach putter, handles any wind condition.'],
+    ['Dynamic Discs Judge', 'Putter', 13.99, 45, 'DG-014', 'Dynamic Discs – Speed 2 | Glide 4 | Turn 0 | Fade 1. Straight-flying, comfortable putter for all styles.'],
+    ['Axiom Envy', 'Putter', 15.99, 30, 'DG-015', 'Axiom – Speed 3 | Glide 3 | Turn -1 | Fade 2. Overmold putter with great feel and consistent flight.'],
+    // Bags
+    ['Discmania Weekender Bag', 'Disc Bag', 49.99, 12, 'DG-016', '6–8 disc capacity. Lightweight and compact, perfect for casual rounds. Includes two beverage pockets.'],
+    ['Dynamic Discs Ranger Bag', 'Disc Bag', 89.99, 8, 'DG-017', '18+ disc capacity. Backpack-style with padded straps, cooler pocket, and rain fly included.'],
+    ['Prodigy Disc BP-3 Backpack', 'Disc Bag', 119.99, 6, 'DG-018', '20–25 disc capacity. Premium backpack with multiple pockets, insulated cooler, and ergonomic design.'],
+    // Equipment & Accessories
+    ['MVP Black Hole Pro Basket', 'Basket', 289.99, 3, 'DG-019', 'Competition-grade portable disc golf basket. 24-chain dual-level catching system, heavy-duty steel construction.'],
+    ['Discraft Towel & Mini Marker Set', 'Accessories', 14.99, 60, 'DG-020', 'Includes microfiber disc cleaning towel and two mini disc markers. Essential field accessories for any round.'],
   ];
   const insertMany = db.transaction((items) => {
     for (const item of items) insert.run(...item);
