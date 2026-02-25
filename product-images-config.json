@@ -1,0 +1,144 @@
+{
+  "products": [
+    {
+      "sku": "DG-001",
+      "name": "Innova Boss",
+      "imageUrl": "/images/products/innova-boss.jpg",
+      "source": "https://www.innovadiscs.com/innova-boss/",
+      "notes": "Download from Innova Discs official site"
+    },
+    {
+      "sku": "DG-002",
+      "name": "Discraft Zeus",
+      "imageUrl": "/images/products/discraft-zeus.jpg",
+      "source": "https://www.discraft.com/zeus/",
+      "notes": "Download from Discraft official site"
+    },
+    {
+      "sku": "DG-003",
+      "name": "Dynamic Discs Felon",
+      "imageUrl": "/images/products/dynamic-discs-felon.jpg",
+      "source": "https://www.dynamicdiscs.com/felon/",
+      "notes": "Download from Dynamic Discs official site"
+    },
+    {
+      "sku": "DG-004",
+      "name": "Latitude 64 Missilen",
+      "imageUrl": "/images/products/latitude64-missilen.jpg",
+      "source": "https://www.latitude64golf.com/missilen/",
+      "notes": "Download from Latitude 64 official site"
+    },
+    {
+      "sku": "DG-005",
+      "name": "Innova Leopard3",
+      "imageUrl": "/images/products/innova-leopard3.jpg",
+      "source": "https://www.innovadiscs.com/innova-leopard3/",
+      "notes": "Download from Innova Discs official site"
+    },
+    {
+      "sku": "DG-006",
+      "name": "Discraft Buzzz SS",
+      "imageUrl": "/images/products/discraft-buzzz-ss.jpg",
+      "source": "https://www.discraft.com/buzzz-ss/",
+      "notes": "Download from Discraft official site"
+    },
+    {
+      "sku": "DG-007",
+      "name": "Kastaplast Reko",
+      "imageUrl": "/images/products/kastaplast-reko.jpg",
+      "source": "https://www.kastaplast.com/reko/",
+      "notes": "Download from Kastaplast official site"
+    },
+    {
+      "sku": "DG-008",
+      "name": "Innova Mako3",
+      "imageUrl": "/images/products/innova-mako3.jpg",
+      "source": "https://www.innovadiscs.com/innova-mako3/",
+      "notes": "Download from Innova Discs official site"
+    },
+    {
+      "sku": "DG-009",
+      "name": "Discraft Buzzz",
+      "imageUrl": "/images/products/discraft-buzzz.jpg",
+      "source": "https://www.discraft.com/buzzz/",
+      "notes": "Download from Discraft official site"
+    },
+    {
+      "sku": "DG-010",
+      "name": "Dynamic Discs Verdict",
+      "imageUrl": "/images/products/dynamic-discs-verdict.jpg",
+      "source": "https://www.dynamicdiscs.com/verdict/",
+      "notes": "Download from Dynamic Discs official site"
+    },
+    {
+      "sku": "DG-011",
+      "name": "Westside Stag",
+      "imageUrl": "/images/products/westside-stag.jpg",
+      "source": "https://www.westsidediscs.com/stag/",
+      "notes": "Download from Westside Discs official site"
+    },
+    {
+      "sku": "DG-012",
+      "name": "Innova Aviar",
+      "imageUrl": "/images/products/innova-aviar.jpg",
+      "source": "https://www.innovadiscs.com/innova-aviar/",
+      "notes": "Download from Innova Discs official site"
+    },
+    {
+      "sku": "DG-013",
+      "name": "Discraft Zone",
+      "imageUrl": "/images/products/discraft-zone.jpg",
+      "source": "https://www.discraft.com/zone/",
+      "notes": "Download from Discraft official site"
+    },
+    {
+      "sku": "DG-014",
+      "name": "Dynamic Discs Judge",
+      "imageUrl": "/images/products/dynamic-discs-judge.jpg",
+      "source": "https://www.dynamicdiscs.com/judge/",
+      "notes": "Download from Dynamic Discs official site"
+    },
+    {
+      "sku": "DG-015",
+      "name": "Axiom Envy",
+      "imageUrl": "/images/products/axiom-envy.jpg",
+      "source": "https://www.axiomdisc.com/envy/",
+      "notes": "Download from Axiom official site"
+    },
+    {
+      "sku": "DG-016",
+      "name": "Discmania Weekender Bag",
+      "imageUrl": "/images/products/discmania-weekender.jpg",
+      "source": "https://www.discmania.net/weekender-bag/",
+      "notes": "Download from Discmania official site"
+    },
+    {
+      "sku": "DG-017",
+      "name": "Dynamic Discs Ranger Bag",
+      "imageUrl": "/images/products/dynamic-discs-ranger.jpg",
+      "source": "https://www.dynamicdiscs.com/ranger-bag/",
+      "notes": "Download from Dynamic Discs official site"
+    },
+    {
+      "sku": "DG-018",
+      "name": "Prodigy Disc BP-3 Backpack",
+      "imageUrl": "/images/products/prodigy-bp3.jpg",
+      "source": "https://www.prodigydisc.com/bp-3/",
+      "notes": "Download from Prodigy Disc official site"
+    },
+    {
+      "sku": "DG-019",
+      "name": "MVP Black Hole Pro Basket",
+      "imageUrl": "/images/products/mvp-basket.jpg",
+      "source": "https://www.mvpdiscs.com/black-hole/",
+      "notes": "Download from MVP official site"
+    },
+    {
+      "sku": "DG-020",
+      "name": "Discraft Towel & Mini Marker Set",
+      "imageUrl": "/images/products/discraft-towel.jpg",
+      "source": "https://www.discraft.com/accessories/",
+      "notes": "Download from Discraft official site"
+    }
+  ]
+}
