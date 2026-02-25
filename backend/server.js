@@ -37,6 +37,12 @@ try {
 }
 
 // Seed with 20 disc golf products if empty
+// NOTE: To use official manufacturer product images:
+// 1. Download images from manufacturer websites to: frontend/public/images/products/
+// 2. Use filenames like: innova-boss.png, discraft-zeus.jpg, etc.
+// 3. Update the image_url below to: '/images/products/innova-boss.png', etc.
+// 4. Delete this database file to trigger re-seeding with new images
+// See frontend/public/images/products/README.md for detailed instructions
 const count = db.prepare('SELECT COUNT(*) as cnt FROM products').get();
 if (count.cnt === 0) {
   const insert = db.prepare(
