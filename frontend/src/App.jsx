@@ -6,6 +6,17 @@ const API = '/api'
 
 const CATEGORIES = ['Distance Driver', 'Fairway Driver', 'Mid-Range', 'Putter', 'Disc Bag', 'Basket', 'Accessories']
 
+// Category icons
+const CATEGORY_ICONS = {
+  'Distance Driver': '⚡',      // Speed & Power
+  'Fairway Driver': '🎯',      // Accuracy & Control
+  'Mid-Range': '🎲',           // Versatile
+  'Putter': '⛳',              // Finish
+  'Disc Bag': '🎒',            // Carry
+  'Basket': '🧺',              // Target
+  'Accessories': '🛠️'         // Tools & Extras
+}
+
 function qtyClass(q) {
   if (q === 0) return 'low'
   if (q <= 5) return 'warn'
@@ -165,7 +176,7 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
       )}
       <div className="card-header">
         <span className="card-name">{product.name}</span>
-        <span className={catClass}>{product.category}</span>
+        <span className={catClass}>{CATEGORY_ICONS[product.category]} {product.category}</span>
       </div>
       <p className="card-desc">{product.description || <em>No description</em>}</p>
       <span className="card-sku">{product.sku}</span>
@@ -215,6 +226,21 @@ export default function App() {
       setLoading(false)
     }
   }, [search, activeCat])
+
+  // Group products by category
+  const groupedProducts = useCallback(() => {
+    if (activeCat !== 'All') {
+      // If filtering by category, still group them for consistency
+      return { [activeCat]: products }
+    }
+    // Group by category when showing all
+    const grouped = {}
+    CATEGORIES.forEach(cat => { grouped[cat] = [] })
+    products.forEach(p => {
+      if (grouped[p.category]) grouped[p.category].push(p)
+    })
+    return Object.fromEntries(Object.entries(grouped).filter(([_, items]) => items.length > 0))
+  }, [products, activeCat])
 
   const fetchCategories = async () => {
     try {
@@ -323,9 +349,20 @@ export default function App() {
             <p>{search || activeCat !== 'All' ? 'Try adjusting your filters.' : 'Add your first product to get started.'}</p>
           </div>
         ) : (
-          <div className="products-grid">
-            {products.map(p => (
-              <ProductCard key={p.id} product={p} onEdit={setEditProduct} onDelete={setDeleteProduct} onQtyChange={updateQty} />
+          <div className="products-grouped">
+            {Object.entries(groupedProducts()).map(([category, items]) => (
+              <section key={category} className="category-section">
+                <div className="category-header">
+                  <span className="category-icon">{CATEGORY_ICONS[category]}</span>
+                  <h2 className="category-title">{category}</h2>
+                  <span className="category-count">{items.length} item{items.length !== 1 ? 's' : ''}</span>
+                </div>
+                <div className="products-grid">
+                  {items.map(p => (
+                    <ProductCard key={p.id} product={p} onEdit={setEditProduct} onDelete={setDeleteProduct} onQtyChange={updateQty} />
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         )}
