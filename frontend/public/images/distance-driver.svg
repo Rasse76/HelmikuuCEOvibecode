@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="plate" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+    <radialGradient id="rim" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="3" dy="4" stdDeviation="5" flood-color="rgba(0,0,0,0.5)"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="200" height="200" fill="#0d2a1a" rx="12"/>
+  <!-- Disc shadow -->
+  <ellipse cx="103" cy="106" rx="88" ry="85" fill="rgba(0,0,0,0.4)"/>
+  <!-- Outer rim -->
+  <circle cx="100" cy="100" r="88" fill="url(#rim)" filter="url(#shadow)"/>
+  <!-- Inner flight plate -->
+  <circle cx="100" cy="100" r="72" fill="url(#plate)"/>
+  <!-- Dome highlight -->
+  <circle cx="100" cy="100" r="44" fill="#991b1b" opacity="0.85"/>
+  <!-- Inner dome rim line -->
+  <circle cx="100" cy="100" r="44" fill="none" stroke="#fca5a5" stroke-width="1.5" opacity="0.4"/>
+  <!-- Mid ring line -->
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#fca5a5" stroke-width="1.5" opacity="0.3"/>
+  <!-- Glare highlight -->
+  <ellipse cx="82" cy="76" rx="28" ry="16" fill="rgba(255,255,255,0.15)" transform="rotate(-25 82 76)"/>
+  <!-- Category label -->
+  <text x="100" y="96" text-anchor="middle" fill="#fca5a5" font-size="9" font-family="sans-serif" font-weight="700" letter-spacing="1" opacity="0.9">DISTANCE</text>
+  <text x="100" y="109" text-anchor="middle" fill="#fca5a5" font-size="9" font-family="sans-serif" font-weight="700" letter-spacing="1" opacity="0.9">DRIVER</text>
+  <!-- Center nub -->
+  <circle cx="100" cy="100" r="7" fill="#450a0a"/>
+  <circle cx="100" cy="100" r="4" fill="#7f1d1d"/>
+</svg>

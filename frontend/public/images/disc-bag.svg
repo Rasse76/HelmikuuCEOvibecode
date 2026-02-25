@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bag-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+    <linearGradient id="bag-strap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.5)"/>
+    </filter>
+  </defs>
+  <rect width="200" height="200" fill="#0d2a1a" rx="12"/>
+  <!-- Bag body -->
+  <rect x="45" y="50" width="110" height="130" rx="14" fill="url(#bag-body)" filter="url(#shadow)"/>
+  <!-- Bag top flap -->
+  <rect x="45" y="50" width="110" height="40" rx="14" fill="#1d4ed8"/>
+  <rect x="45" y="76" width="110" height="14" fill="#1d4ed8"/>
+  <!-- Top handle -->
+  <rect x="82" y="38" width="36" height="22" rx="11" fill="none" stroke="#93c5fd" stroke-width="4"/>
+  <!-- Zipper line on top flap -->
+  <line x1="55" y1="72" x2="145" y2="72" stroke="#93c5fd" stroke-width="2" stroke-dasharray="5,3" opacity="0.6"/>
+  <!-- Main pocket -->
+  <rect x="58" y="102" width="84" height="60" rx="8" fill="rgba(0,0,0,0.25)"/>
+  <!-- Pocket zipper -->
+  <line x1="66" y1="110" x2="134" y2="110" stroke="#93c5fd" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
+  <!-- Side pockets -->
+  <rect x="48" y="105" width="15" height="45" rx="5" fill="rgba(0,0,0,0.2)"/>
+  <rect x="137" y="105" width="15" height="45" rx="5" fill="rgba(0,0,0,0.2)"/>
+  <!-- Disc golf discs inside (visible from top) -->
+  <circle cx="80" cy="88" r="10" fill="none" stroke="#93c5fd" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="100" cy="88" r="10" fill="none" stroke="#93c5fd" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="120" cy="88" r="10" fill="none" stroke="#93c5fd" stroke-width="1.5" opacity="0.5"/>
+  <!-- Brand label area -->
+  <rect x="65" y="115" width="70" height="20" rx="4" fill="rgba(147,197,253,0.15)"/>
+  <text x="100" y="129" text-anchor="middle" fill="#93c5fd" font-size="8" font-family="sans-serif" font-weight="700" letter-spacing="1">DISC BAG</text>
+  <!-- Strap buckle -->
+  <rect x="85" y="162" width="30" height="12" rx="3" fill="#1d4ed8" stroke="#93c5fd" stroke-width="1" opacity="0.7"/>
+</svg>
