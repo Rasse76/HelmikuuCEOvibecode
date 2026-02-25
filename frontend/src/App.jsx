@@ -6,6 +6,16 @@ const API = '/api'
 
 const CATEGORIES = ['Distance Driver', 'Fairway Driver', 'Mid-Range', 'Putter', 'Disc Bag', 'Basket', 'Accessories']
 
+const CATEGORY_IMAGES = {
+  'Distance Driver': '/images/distance-driver.svg',
+  'Fairway Driver': '/images/fairway-driver.svg',
+  'Mid-Range': '/images/mid-range.svg',
+  'Putter': '/images/putter.svg',
+  'Disc Bag': '/images/disc-bag.svg',
+  'Basket': '/images/basket.svg',
+  'Accessories': '/images/accessories.svg',
+}
+
 function qtyClass(q) {
   if (q === 0) return 'low'
   if (q <= 5) return 'warn'
@@ -137,6 +147,8 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
   const [saving, setSaving] = useState(false)
   const [imgError, setImgError] = useState(false)
 
+  const imgSrc = product.image_url || CATEGORY_IMAGES[product.category] || null
+
   useEffect(() => setLocalQty(product.quantity), [product.quantity])
 
   const change = async (delta) => {
@@ -153,11 +165,11 @@ function ProductCard({ product, onEdit, onDelete, onQtyChange }) {
 
   return (
     <div className="product-card">
-      {product.image_url && !imgError && (
+      {imgSrc && !imgError && (
         <div className="card-img-wrap">
           <img
             className="card-img"
-            src={product.image_url}
+            src={imgSrc}
             alt={product.name}
             onError={() => setImgError(true)}
           />
