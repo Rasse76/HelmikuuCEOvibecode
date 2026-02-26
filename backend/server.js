@@ -36,52 +36,72 @@ try {
   // Column already exists, ignore
 }
 
-// Seed with 20 disc golf products if empty
-// NOTE: Disc categories use colored category icons instead of product photos.
-// To use official manufacturer product images, update the image_url values below
-// to '/images/products/...' and re-seed the database.
+// Seed with 28 MVP products (4 discs per category + 4 bags + 4 accessories + 4 Simon Line)
+const products = [
+  // Distance Drivers (4)
+  ["Dimension", "Distance Driver", 17.99, 22, "DG-001", "Distance Driver with a balanced flight profile. Flight: 14.5 | 5 | 0 | 3.", "/images/products/mvp-dimension.jpg"],
+  ["Delirium", "Distance Driver", 17.99, 22, "DG-002", "Distance Driver with a balanced flight profile. Flight: 14.5 | 5 | -0.5 | 3.", "/images/products/mvp-delirium.jpg"],
+  ["Tantrum", "Distance Driver", 17.99, 22, "DG-003", "Distance Driver with a balanced flight profile. Flight: 14.5 | 5 | -1.5 | 3.", "/images/products/mvp-tantrum.jpg"],
+  ["Teleport", "Distance Driver", 17.99, 22, "DG-004", "Distance Driver with a balanced flight profile. Flight: 14.5 | 5 | -1.5 | 2.5.", "/images/products/mvp-teleport.jpg"],
+  // Fairway Drivers (4)
+  ["Terra", "Fairway Driver", 16.99, 26, "DG-005", "Fairway Driver with a balanced flight profile. Flight: 8 | 5 | 0 | 3.", "/images/products/mvp-terra.jpg"],
+  ["Volt", "Fairway Driver", 16.99, 26, "DG-006", "Fairway Driver with a balanced flight profile. Flight: 8 | 5 | -0.5 | 2.", "/images/products/mvp-volt.jpg"],
+  ["Amp", "Fairway Driver", 16.99, 26, "DG-007", "Fairway Driver with a balanced flight profile. Flight: 8 | 5 | -1.5 | 1.", "/images/products/mvp-amp.jpg"],
+  ["Shock", "Fairway Driver", 16.99, 26, "DG-008", "Fairway Driver with a balanced flight profile. Flight: 8 | 5 | 0 | 2.5.", "/images/products/mvp-shock.jpg"],
+  // Mid-Range (4)
+  ["Deflector", "Mid-Range", 15.99, 30, "DG-009", "Mid-Range with a balanced flight profile. Flight: 5 | 3.5 | 0 | 4.", "/images/products/mvp-deflector.jpg"],
+  ["Pyro", "Mid-Range", 15.99, 30, "DG-010", "Mid-Range with a balanced flight profile. Flight: 5 | 4 | 0 | 2.5.", "/images/products/mvp-pyro.jpg"],
+  ["Balance - Prototype", "Mid-Range", 15.99, 30, "DG-011", "Mid-Range with a balanced flight profile. Flight: 5 | 4 | 0 | 3.", "/images/products/mvp-balance-prototype.jpg"],
+  ["Balance", "Mid-Range", 15.99, 30, "DG-012", "Mid-Range with a balanced flight profile. Flight: 5 | 5 | 0 | 2.", "/images/products/mvp-balance.jpg"],
+  // Putters (4)
+  ["Tempo", "Putter", 13.99, 34, "DG-013", "Putter with a balanced flight profile. Flight: 4 | 4 | 0 | 2.5.", "/images/products/mvp-tempo.jpg"],
+  ["Ion", "Putter", 13.99, 34, "DG-014", "Putter with a balanced flight profile. Flight: 2.5 | 3 | 0 | 1.5.", "/images/products/mvp-ion.jpg"],
+  ["Anode", "Putter", 13.99, 34, "DG-015", "Putter with a balanced flight profile. Flight: 2.5 | 3 | 0 | 0.5.", "/images/products/mvp-anode.jpg"],
+  ["Spin", "Putter", 13.99, 34, "DG-016", "Putter with a balanced flight profile. Flight: 2.5 | 4 | -2 | 0.", "/images/products/mvp-spin.jpg"],
+  // Bags (4)
+  ["MVP Shuttle Backpack", "Disc Bag", 89.99, 8, "DG-017", "Compact 15-disc capacity backpack. Water bottle holder, phone pocket, and comfortable straps.", "/images/products/mvp-shuttle-backpack.jpg"],
+  ["MVP Voyager Bag", "Disc Bag", 149.99, 5, "DG-018", "25+ disc capacity. Premium backpack with insulated cooler pocket and rain cover included.", "/images/products/mvp-voyager-bag.jpg"],
+  ["MVP Cell Starter Bag", "Disc Bag", 39.99, 12, "DG-019", "Lightweight shoulder bag for 8-10 discs. Perfect for casual rounds and beginners.", "/images/products/mvp-cell-starter-bag.jpg"],
+  ["MVP Rover Cart", "Disc Bag", 199.99, 3, "DG-020", "Disc golf cart with large wheels. Holds up to 30 discs plus accessories. Folds for transport.", "/images/products/mvp-rover-cart.jpg"],
+  // Accessories (4)
+  ["MVP Black Hole Pro Basket", "Accessories and baskets", 289.99, 3, "DG-021", "Competition-grade portable basket. 24-chain dual-level catching system, heavy-duty steel.", "/images/products/mvp-black-hole-pro-basket.jpg"],
+  ["MVP Orbit Mini Marker Set", "Accessories and baskets", 12.99, 45, "DG-022", "Set of 3 mini disc markers. Overmold design with GYRO technology branding.", "/images/products/mvp-orbit-mini-marker-set.jpg"],
+  ["MVP Towel", "Accessories and baskets", 14.99, 38, "DG-023", "Microfiber disc cleaning towel with carabiner clip. MVP logo embroidered.", "/images/products/mvp-towel.jpg"],
+  ["MVP Black Hole Portable Practice Basket", "Accessories and baskets", 159.99, 6, "DG-024", "Lightweight portable basket for practice. Collapsible design, carries in included bag.", "/images/products/mvp-black-hole-portable-practice-basket.jpg"],
+  // Simon Lizotte Line (4)
+  ["Time-Lapse", "Simon Lizotte Line", 17.99, 20, "DG-025", "Simon Line disc with flight: 12 | 5 | -3 | 2.", "/images/products/mvp-time-lapse.jpg"],
+  ["Pixel", "Simon Lizotte Line", 13.99, 20, "DG-026", "Simon Line disc with flight: 3 | 3 | 0 | 1.", "/images/products/mvp-pixel.jpg"],
+  ["Balance (Simon Line)", "Simon Lizotte Line", 15.99, 20, "DG-027", "Simon Line disc with flight: 5 | 5 | 0 | 2.", "/images/products/mvp-balance-simon.jpg"],
+  ["Nomad", "Simon Lizotte Line", 13.99, 20, "DG-028", "Simon Line disc with flight: 2.5 | 3 | -0.5 | 1.", "/images/products/mvp-nomad.jpg"],
+];
+
 const count = db.prepare('SELECT COUNT(*) as cnt FROM products').get();
 if (count.cnt === 0) {
   const insert = db.prepare(
     'INSERT INTO products (name, category, price, quantity, sku, description, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)'
   );
-  const products = [
-    // Distance Drivers - Use category icon
-    ['Innova Boss', 'Distance Driver', 16.99, 24, 'DG-001', 'Innova – Speed 13 | Glide 5 | Turn -1 | Fade 3. Overstable high-speed driver. Great for powerful throwers.', '/images/distance-driver.svg'],
-    ['Discraft Zeus', 'Distance Driver', 17.99, 18, 'DG-002', 'Discraft – Speed 12 | Glide 5 | Turn -1 | Fade 3. Paul McBeth signature overstable driver.', '/images/distance-driver.svg'],
-    ['Dynamic Discs Felon', 'Distance Driver', 16.99, 20, 'DG-003', 'Dynamic Discs – Speed 12 | Glide 5 | Turn 0 | Fade 3. Overstable workhorse driver for headwinds.', '/images/distance-driver.svg'],
-    ['Latitude 64 Missilen', 'Distance Driver', 17.99, 15, 'DG-004', 'Latitude 64 – Speed 14 | Glide 4 | Turn 0 | Fade 4. Max-speed overstable driver for pro-level power.', '/images/distance-driver.svg'],
-    // Fairway Drivers - Use category icon
-    ['Innova Leopard3', 'Fairway Driver', 15.99, 30, 'DG-005', 'Innova – Speed 7 | Glide 5 | Turn -2 | Fade 1. Understable fairway driver, great for beginners and hyzer-flips.', '/images/fairway-driver.svg'],
-    ['Discraft Buzzz SS', 'Fairway Driver', 15.99, 25, 'DG-006', 'Discraft – Speed 5 | Glide 5 | Turn -3 | Fade 1. Understable fairway driver ideal for anhyzer lines.', '/images/fairway-driver.svg'],
-    ['Kastaplast Reko', 'Fairway Driver', 17.99, 22, 'DG-007', 'Kastaplast – Speed 4 | Glide 7 | Turn -1 | Fade 1. Straight, reliable fairway driver for all skill levels.', '/images/fairway-driver.svg'],
-    // Mid-Range Discs - Use category icon
-    ['Innova Mako3', 'Mid-Range', 14.99, 35, 'DG-008', 'Innova – Speed 5 | Glide 5 | Turn 0 | Fade 0. Perfectly neutral mid-range, goes exactly where you throw it.', '/images/mid-range.svg'],
-    ['Discraft Buzzz', 'Mid-Range', 15.99, 40, 'DG-009', 'Discraft – Speed 5 | Glide 4 | Turn -1 | Fade 1. The most popular mid-range disc ever made. Reliable and straight.', '/images/mid-range.svg'],
-    ['Dynamic Discs Verdict', 'Mid-Range', 14.99, 28, 'DG-010', 'Dynamic Discs – Speed 5 | Glide 5 | Turn -1 | Fade 2. Versatile overstable mid-range for accurate approach shots.', '/images/mid-range.svg'],
-    ['Westside Discs Stag', 'Mid-Range', 15.99, 22, 'DG-011', 'Westside – Speed 5 | Glide 5 | Turn -1 | Fade 1. Controllable mid-range with smooth flight path.', '/images/mid-range.svg'],
-    // Putters - Use category icon
-    ['Innova Aviar', 'Putter', 13.99, 50, 'DG-012', 'Innova – Speed 2 | Glide 3 | Turn 0 | Fade 1. The classic putter. Reliable, consistent, trusted by pros worldwide.', '/images/putter.svg'],
-    ['Discraft Zone', 'Putter', 14.99, 38, 'DG-013', 'Discraft – Speed 4 | Glide 3 | Turn 0 | Fade 3. Overstable approach putter, handles any wind condition.', '/images/putter.svg'],
-    ['Dynamic Discs Judge', 'Putter', 13.99, 45, 'DG-014', 'Dynamic Discs – Speed 2 | Glide 4 | Turn 0 | Fade 1. Straight-flying, comfortable putter for all styles.', '/images/putter.svg'],
-    ['Axiom Envy', 'Putter', 15.99, 30, 'DG-015', 'Axiom – Speed 3 | Glide 3 | Turn -1 | Fade 2. Overmold putter with great feel and consistent flight.', '/images/putter.svg'],
-    // Bags - Use category icon
-    ['Discmania Weekender Bag', 'Disc Bag', 49.99, 12, 'DG-016', '6–8 disc capacity. Lightweight and compact, perfect for casual rounds. Includes two beverage pockets.', '/images/disc-bag.svg'],
-    ['Dynamic Discs Ranger Bag', 'Disc Bag', 89.99, 8, 'DG-017', '18+ disc capacity. Backpack-style with padded straps, cooler pocket, and rain fly included.', '/images/disc-bag.svg'],
-    ['Prodigy Disc BP-3 Backpack', 'Disc Bag', 119.99, 6, 'DG-018', '20–25 disc capacity. Premium backpack with multiple pockets, insulated cooler, and ergonomic design.', '/images/disc-bag.svg'],
-    // Equipment & Accessories - Use category icon except basket
-    ['MVP Black Hole Pro Basket', 'Accessories and baskets', 289.99, 3, 'DG-019', 'Competition-grade portable disc golf basket. 24-chain dual-level catching system, heavy-duty steel construction.', '/images/products/mvp-basket.jpg'],
-    ['Discraft Towel & Mini Marker Set', 'Accessories and baskets', 14.99, 60, 'DG-020', 'Includes microfiber disc cleaning towel and two mini disc markers. Essential field accessories for any round.', '/images/accessories.svg'],
-  ];
   const insertMany = db.transaction((items) => {
     for (const item of items) insert.run(...item);
   });
   insertMany(products);
 }
 
-// Migration: Combine Basket and Accessories into Accessories and baskets
-db.prepare('UPDATE products SET category = ? WHERE category = ?').run('Accessories and baskets', 'Basket');
-db.prepare('UPDATE products SET category = ? WHERE category = ?').run('Accessories and baskets', 'Accessories');
+// Sync inventory to the MVP disc list
+const skuList = products.map((item) => item[4]);
+if (skuList.length > 0) {
+  const placeholders = skuList.map(() => '?').join(', ');
+  db.prepare(`DELETE FROM products WHERE sku NOT IN (${placeholders})`).run(...skuList);
+}
+const upsert = db.prepare(
+  'INSERT INTO products (name, category, price, quantity, sku, description, image_url) VALUES (?, ?, ?, ?, ?, ?, ?) '
+  + 'ON CONFLICT(sku) DO UPDATE SET '
+  + 'name=excluded.name, category=excluded.category, price=excluded.price, '
+  + 'quantity=excluded.quantity, description=excluded.description, image_url=excluded.image_url'
+);
+const upsertMany = db.transaction((items) => {
+  for (const item of items) upsert.run(...item);
+});
+upsertMany(products);
 
 // Migration: Revert category images to icons for existing databases
 const categoryIcons = {
@@ -94,14 +114,10 @@ const categoryIcons = {
 };
 for (const [category, icon] of Object.entries(categoryIcons)) {
   db.prepare(
-    "UPDATE products SET image_url = ? WHERE category = ? AND (image_url IS NULL OR image_url = '' OR image_url LIKE '/images/products/%')"
+    "UPDATE products SET image_url = ? WHERE category = ? AND (image_url IS NULL OR image_url = '')"
   ).run(icon, category);
 }
 
-// Override basket image to use product photo
-db.prepare(
-  "UPDATE products SET image_url = ? WHERE sku = ?"
-).run('/images/products/mvp-basket.jpg', 'DG-019');
 
 // Add fallback images - uses category icons if product image not found
 // The frontend will show the product image if it exists, then fallback to category SVG

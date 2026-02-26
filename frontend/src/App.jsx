@@ -13,6 +13,7 @@ const CATEGORY_IMAGES = {
   'Putter': '/images/putter.svg',
   'Disc Bag': '/images/disc-bag.svg',
   'Accessories and baskets': '/images/accessories.svg',
+  'Simon Lizotte Line': '/images/simon-line.svg',
 }
 
 // Define custom category order. Discs first, then other items.
@@ -22,6 +23,7 @@ const CATEGORY_ORDER = [
   'Fairway Driver',
   'Mid-Range',
   'Putter',
+  'Simon Lizotte Line',
   'Disc Bag',
   'Accessories and baskets',
 ]
@@ -219,7 +221,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [activeCat, setActiveCat] = useState('All')
-  const [viewMode, setViewMode] = useState('grid') // 'grid' or 'category'
+  const [viewMode, setViewMode] = useState('category') // 'grid' or 'category'
   const [editProduct, setEditProduct] = useState(null)  // null=closed, {}=new, product=edit
   const [deleteProduct, setDeleteProduct] = useState(null)
   const { toasts, add: toast } = useToasts()
@@ -331,7 +333,7 @@ export default function App() {
         <div className="header-brand">
           <span className="header-logo">🥏</span>
           <div>
-            <div className="header-title">DiscGolf Pro Shop</div>
+            <div className="header-title">Rasse's DiscGolf Pro Shop</div>
             <div className="header-subtitle">Inventory Management</div>
           </div>
         </div>
