@@ -177,7 +177,7 @@ app.post('/api/products', (req, res) => {
   try {
     const result = db.prepare(
       'INSERT INTO products (name, category, price, quantity, sku, description, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)'
-    ).run(name, category, price, quantity, sku, description || '', image_url || categoryImages[category] || '');
+    ).run(name, category, price, quantity, sku, description || '', image_url || categoryFallback[category] || '');
     const product = db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid);
     res.status(201).json(product);
   } catch (err) {
